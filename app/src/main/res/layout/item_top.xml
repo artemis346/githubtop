@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_item_top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textview_rep_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:drawableEnd="@drawable/ic_grade"
+        android:drawableRight="@drawable/ic_grade"
+        android:gravity="center"
+        android:padding="5dp"
+        tools:text="rate: 21" />
+
+    <TextView
+        android:id="@+id/textview_rep_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/textview_rep_rate"
+        android:layout_toStartOf="@id/textview_rep_rate"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:padding="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:text="GitHubRep" />
+
+    <TextView
+        android:id="@+id/textview_rep_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_rep_name"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        tools:text="Иванов Иван" />
+</RelativeLayout>

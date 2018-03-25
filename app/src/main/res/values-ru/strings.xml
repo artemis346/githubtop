@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Топ GitHub</string>
+    <string name="label_rep_name">Звезды: %d</string>
+
+    <string name="error_inet">Не удалось загрузить данные</string>
+    <string name="error_inet_connection">Нет подключения к интернету</string>
+    <string name="error_empty_search_results">По вашему запросу ничего не найдено</string>
+    <string name="error_no_browser">На вашем устройстве не установлен браузер</string>
+</resources>
