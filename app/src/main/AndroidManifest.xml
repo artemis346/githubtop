@@ -20,5 +20,6 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.RepositoryActivity"/>
     </application>
 </manifest>

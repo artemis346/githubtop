@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.artemis.githubtop.mvp.presenter.PresenterDetails;
 import com.artemis.githubtop.mvp.presenter.PresenterSearch;
 import com.artemis.githubtop.R;
 import com.artemis.githubtop.domain.entity.GhReps;
@@ -151,10 +152,11 @@ public class TopListActivity extends MvpAppCompatActivity implements SearchView,
 
     @Override
     public void startBrowser(Uri url) {
-        boolean result = ComponentUtils.startBrowserApp(this, url);
-        if (!result) {
-            Toast.makeText(this, R.string.error_no_browser, Toast.LENGTH_SHORT).show();
-        }
+        RepositoryActivity.startActivity(url.toString(), this);
+//        boolean result = ComponentUtils.startBrowserApp(this, url);
+//        if (!result) {
+//            Toast.makeText(this, R.string.error_no_browser, Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
