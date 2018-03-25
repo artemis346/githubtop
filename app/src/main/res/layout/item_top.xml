@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:id="@+id/container_item_top">
+
+    <TextView
+        android:id="@+id/textview_rep_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        tools:text="rate: 21"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/textview_rep_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/textview_rep_rate"
+        android:layout_toStartOf="@id/textview_rep_rate"
+        tools:text="GitHubRep"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/textview_rep_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_rep_name"
+        tools:text="Иванов Иван"
+        android:padding="5dp"/>
+</RelativeLayout>
