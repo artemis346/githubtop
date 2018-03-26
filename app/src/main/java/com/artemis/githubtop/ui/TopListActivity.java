@@ -3,6 +3,7 @@ package com.artemis.githubtop.ui;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.artemis.githubtop.mvp.presenter.PresenterDetails;
 import com.artemis.githubtop.mvp.presenter.PresenterSearch;
 import com.artemis.githubtop.R;
 import com.artemis.githubtop.domain.entity.GhReps;
@@ -67,6 +67,7 @@ public class TopListActivity extends MvpAppCompatActivity implements SearchView,
         vRecyclerSearch.setAdapter(adapter);
         vRecyclerSearch.setLayoutManager(layoutManager);
         vRecyclerSearch.addOnScrollListener(new EndlessScroller(layoutManager,this));
+        vRecyclerSearch.addItemDecoration(new DividerItemDecoration(this, layoutManager.getOrientation()));
     }
 
     @OnClick(R.id.button_refresh)
@@ -96,6 +97,7 @@ public class TopListActivity extends MvpAppCompatActivity implements SearchView,
 
     @Override
     public void showErrorLabel() {
+        vTxtLoadingError.setText(R.string.error_empty_search_results);
         vTxtLoadingError.setVisibility(View.VISIBLE);
     }
 
@@ -152,11 +154,10 @@ public class TopListActivity extends MvpAppCompatActivity implements SearchView,
 
     @Override
     public void startBrowser(Uri url) {
-        RepositoryActivity.startActivity(url.toString(), this);
-//        boolean result = ComponentUtils.startBrowserApp(this, url);
-//        if (!result) {
-//            Toast.makeText(this, R.string.error_no_browser, Toast.LENGTH_SHORT).show();
-//        }
+        boolean result = ComponentUtils.startBrowserApp(this, url);
+        if (!result) {
+            RepositoryActivity.startActivity(url.toString(), this);
+        }
     }
 
     @Override

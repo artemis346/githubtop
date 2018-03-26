@@ -11,9 +11,12 @@ import android.net.Uri;
 public class ComponentUtils {
 
     public static boolean startBrowserApp(Context context, Uri url) {
+        if (context == null) {
+            return false;
+        }
+
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, url);
         if (browserIntent.resolveActivity(context.getPackageManager()) != null) {
-            browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(browserIntent);
             return true;
         }

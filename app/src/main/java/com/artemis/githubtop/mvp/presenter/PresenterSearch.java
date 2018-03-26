@@ -5,9 +5,8 @@ import android.net.Uri;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.artemis.githubtop.data.net.ConnectivityInterceptor;
-import com.artemis.githubtop.domain.MapperReps;
-import com.artemis.githubtop.domain.SearchItem;
-import com.artemis.githubtop.domain.entity.GhReps;
+import com.artemis.githubtop.mvp.model.MapperReps;
+import com.artemis.githubtop.mvp.model.SearchResultItem;
 import com.artemis.githubtop.domain.entity.GhRepsList;
 import com.artemis.githubtop.domain.InteractorSearch;
 import com.artemis.githubtop.mvp.view.ItemSearchView;
@@ -28,7 +27,8 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class PresenterSearch extends MvpPresenter<SearchView> implements ListPresenter {
 
-    private List<SearchItem> items;
+
+    private List<SearchResultItem> items;
 
     private InteractorSearch topic;
 
@@ -59,7 +59,7 @@ public class PresenterSearch extends MvpPresenter<SearchView> implements ListPre
 
     @Override
     public void bindItemView(ItemSearchView itemView, int position) {
-        SearchItem rep = items.get(position);
+        SearchResultItem rep = items.get(position);
         itemView.setRepName(rep.getName());
         itemView.setOwner(rep.getOwnerName());
         itemView.setRate(rep.getStarCount());
@@ -110,6 +110,7 @@ public class PresenterSearch extends MvpPresenter<SearchView> implements ListPre
     private void errorReceived() {
         if (pageNum == 1) {
             pageNum--;
+            getViewState().showErrorLabel();
         }
         getViewState().hideLoadingFirstPage();
         getViewState().hideLoadingPage();
@@ -127,48 +128,58 @@ public class PresenterSearch extends MvpPresenter<SearchView> implements ListPre
         topic.getTopAndroid(pageNum)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Function<GhRepsList, List<SearchItem>>() {
+                .map(new Function<GhRepsList, List<SearchResultItem>>() {
                     @Override
-                    public List<SearchItem> apply(GhRepsList ghRepsList) throws Exception {
+                    public List<SearchResultItem> apply(GhRepsList ghRepsList) throws Exception {
                         return MapperReps.transform(ghRepsList);
                     }
                 })
-                .subscribe(new Consumer<List<SearchItem>>() {
+                .subscribe(new Consumer<List<SearchResultItem>>() {
                                @Override
-                               public void accept(List<SearchItem> searchItems) throws Exception {
-                                   int sizeCurrent = 0;
-                                   if (isFirstPage()) {
-                                       pageNumBeforeRefresh = 0;
-                                       clearListData();
-                                   } else {
-                                       sizeCurrent = items.size();
-                                   }
-                                   items.addAll(searchItems);
-
-                                   if (items != null && !items.isEmpty()) {
-                                       if (isFirstPage()) {
-                                           finishLoadingFirstPage();
-                                       } else {
-                                           finishLoadingNewPage(sizeCurrent, searchItems.size());
-                                       }
-                                   } else {
-                                       receivedEmptyList();
-                                   }
+                               public void accept(List<SearchResultItem> searchItems) throws Exception {
+                                   handleReceivedData(searchItems);
                                }
                            },
                         new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         resetPageNum();
-                        if (throwable instanceof ConnectivityInterceptor.NoConnectivityException) {
-                            getViewState().onErrorInet();
-                        } else {
-                            getViewState().showErrorLabel();
-                        }
-                        errorReceived();
+                        handleErrorReceived(throwable);
                     }
                 });
     }
+
+    private void handleReceivedData(List<SearchResultItem> searchItems) {
+        int sizeCurrent = 0;
+        if (isFirstPage()) {
+            pageNumBeforeRefresh = 0;
+            clearListData();
+        } else {
+            sizeCurrent = items.size();
+        }
+        items.addAll(searchItems);
+
+        if (items != null && !items.isEmpty()) {
+            if (isFirstPage()) {
+                finishLoadingFirstPage();
+            } else {
+                finishLoadingNewPage(sizeCurrent, searchItems.size());
+            }
+        } else {
+            receivedEmptyList();
+        }
+    }
+
+    private void handleErrorReceived(Throwable throwable) {
+        resetPageNum();
+        if (throwable instanceof ConnectivityInterceptor.NoConnectivityException) {
+            getViewState().onErrorInet();
+        } else {
+            getViewState().onError();
+        }
+        errorReceived();
+    }
+
 
     private void resetPageNum() {
         if (pageNumBeforeRefresh > 0) {

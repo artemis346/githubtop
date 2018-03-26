@@ -12,10 +12,14 @@ import io.reactivex.Flowable;
 
 public class SearchParameters {
 
+    public static final String SEARCH_TOPIC_ANDROID = "android";
+
+    private static final int DEFAULT_PAGE_SIZE = 20;
+
     private SearchSortParams filter;
     private List<String> topics;
     private int pageNum = 1;
-    private int resultSize = 20;
+    private int resultSize = DEFAULT_PAGE_SIZE;
 
     public SearchSortParams getFilter() {
         return filter;

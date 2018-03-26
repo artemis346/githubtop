@@ -1,4 +1,4 @@
-package com.artemis.githubtop.domain;
+package com.artemis.githubtop.mvp.model;
 
 import com.artemis.githubtop.domain.entity.GhReps;
 import com.artemis.githubtop.domain.entity.GhRepsList;
@@ -7,29 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by artoym on 25.03.2018.
+ * Маппер для перевода данных списка репозиториев GitHub в выдачу результатов поиска
  */
 
 public class MapperReps {
 
-    public static SearchItem transform(GhReps repository) {
+    public static SearchResultItem transform(GhReps repository) {
         if (repository == null) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
-        final SearchItem searchItem = new SearchItem();
+        final SearchResultItem searchItem = new SearchResultItem();
         searchItem.setName(repository.getName());
         searchItem.setOwnerName(repository.getOwner().getName());
-        searchItem.setStarCount(repository.getStartAmmount());
+        searchItem.setStarCount(repository.getStarAmount());
         searchItem.setUrl(repository.getUrl());
         return searchItem;
     }
 
 
-    public static List<SearchItem> transform(GhRepsList repositories) {
+    public static List<SearchResultItem> transform(GhRepsList repositories) {
         if (repositories == null || repositories.listIsEmpty()) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
-        List<SearchItem> list = new ArrayList<>();
+        List<SearchResultItem> list = new ArrayList<>();
         for(GhReps rep : repositories.getItems()) {
             list.add(transform(rep));
         }

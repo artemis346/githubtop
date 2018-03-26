@@ -8,6 +8,10 @@ package com.artemis.githubtop.data.sources;
 
 public class GhRepsStoreFactory {
 
+    /**
+     * метод создает сетевое хранилище
+     * @return возвращает сетевое хранилище списка репозиториев
+     */
     public GhRepsDataStore createNetStore() {
         final SearchApiProvider api = new SearchApiProvider();
         return new GhRepsNetDataStore(api);

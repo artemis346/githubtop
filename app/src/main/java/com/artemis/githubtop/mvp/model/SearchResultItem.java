@@ -1,17 +1,28 @@
-package com.artemis.githubtop.domain;
+package com.artemis.githubtop.mvp.model;
 
 /**
- * Created by artoym on 25.03.2018.
+ * Класс результатов поиска по репозиториям GitHub
  */
+public class SearchResultItem {
 
-public class SearchItem {
-
+    /**
+     * Наименование репозитория
+     */
     private String name;
 
+    /**
+     * Псевдоним владельца репозитория
+     */
     private String ownerName;
 
+    /**
+     * Ссылка на репозиторий
+     */
     private String url;
 
+    /**
+     * Количество звезд у репозитория
+     */
     private int starCount;
 
     public String getName() {

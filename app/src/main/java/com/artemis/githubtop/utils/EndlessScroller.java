@@ -4,12 +4,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 /**
- * Created by artoym on 25.03.2018.
+ * Объект слушателя на скролл для recyclerView
  */
 
 public class EndlessScroller extends RecyclerView.OnScrollListener {
 
-    private int firstVisibleItem, visibleItemCount, totalItemCount;
+    private int firstVisibleItem, totalItemCount;
 
     private LinearLayoutManager linLayManagerTT;
 
@@ -34,7 +34,6 @@ public class EndlessScroller extends RecyclerView.OnScrollListener {
         if (pageNumber == -1) {
             return;
         }
-        visibleItemCount = recyclerView.getChildCount();
         totalItemCount = linLayManagerTT.getItemCount();
         firstVisibleItem = linLayManagerTT.findFirstVisibleItemPosition();
         if (loading && pageNumber > 0) {
@@ -49,10 +48,6 @@ public class EndlessScroller extends RecyclerView.OnScrollListener {
             pageCallback.onNewPageReached();
         }
 
-    }
-
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
     }
 
     public interface PageScrollCallback {

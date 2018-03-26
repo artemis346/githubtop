@@ -7,7 +7,7 @@ import com.artemis.githubtop.domain.entity.SearchParameters;
 import io.reactivex.Observable;
 
 /**
- * Реализация репозитория для объединения логик загрузки данных из разных источников
+ * Реализация {@link GhRepsRepository} для объединения логик загрузки данных из разных источников
  */
 public class GhRepsDataRepository implements GhRepsRepository {
 

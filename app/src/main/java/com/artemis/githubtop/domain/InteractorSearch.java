@@ -16,9 +16,8 @@ import java.util.List;
 import io.reactivex.Observable;
 
 /**
- * Created by artoym on 24.03.2018.
+ * Интерактор для реализации UseCase поиска в списке репозиториев GitHub
  */
-
 public class InteractorSearch {
 
     private final GhRepsRepository searchProvider;
@@ -30,9 +29,9 @@ public class InteractorSearch {
     public Observable<GhRepsList> getTopAndroid(int pageNum) {
         SearchParameters search = SearchParameters.Builder()
                 .setFilter(SearchParameters.SearchSortParams.Stars)
-                .setTopics(new ArrayList<>(Collections.singletonList("android")))
                 .setPageNum(pageNum)
-                .setResultSize(20)
+                .setTopics(new ArrayList<>(Collections.singletonList(SearchParameters.SEARCH_TOPIC_ANDROID)))
+                .setPageNum(pageNum)
                 .create();
         return searchProvider.getRepsList(search);
     }

@@ -10,9 +10,8 @@ import com.artemis.githubtop.domain.entity.GhReps;
 import java.util.List;
 
 /**
- * Created by artoym on 24.03.2018.
+ * Интерфейс экрана поиска результатов в списке репозиториев
  */
-
 public interface SearchView extends MvpView {
 
     /**
