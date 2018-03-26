@@ -148,13 +148,15 @@ public class TopListActivity extends MvpAppCompatActivity implements SearchView,
     @Override
     public void onEmptyList() {
         vRecyclerSearch.setVisibility(View.GONE);
+        vTxtLoadingError.setVisibility(View.VISIBLE);
+        vTxtLoadingError.setText(R.string.error_empty_search_results);
     }
 
     @Override
     public void startBrowser(Uri url) {
         boolean result = ComponentUtils.startBrowserApp(this, url);
         if (!result) {
-            Toast.makeText(this, R.string.error_no_browser, Toast.LENGTH_SHORT).show();
+            RepositoryActivity.startActivity(url.toString(), this);
         }
     }
 

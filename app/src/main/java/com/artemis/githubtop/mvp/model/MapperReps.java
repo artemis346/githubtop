@@ -19,7 +19,7 @@ public class MapperReps {
         final SearchResultItem searchItem = new SearchResultItem();
         searchItem.setName(repository.getName());
         searchItem.setOwnerName(repository.getOwner().getName());
-        searchItem.setStarCount(repository.getStarAmmount());
+        searchItem.setStarCount(repository.getStarAmount());
         searchItem.setUrl(repository.getUrl());
         return searchItem;
     }

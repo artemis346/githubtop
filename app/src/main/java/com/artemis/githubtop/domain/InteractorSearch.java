@@ -29,6 +29,7 @@ public class InteractorSearch {
     public Observable<GhRepsList> getTopAndroid(int pageNum) {
         SearchParameters search = SearchParameters.Builder()
                 .setFilter(SearchParameters.SearchSortParams.Stars)
+                .setPageNum(pageNum)
                 .setTopics(new ArrayList<>(Collections.singletonList(SearchParameters.SEARCH_TOPIC_ANDROID)))
                 .setPageNum(pageNum)
                 .create();

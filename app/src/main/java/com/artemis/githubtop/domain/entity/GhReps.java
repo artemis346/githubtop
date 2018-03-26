@@ -30,7 +30,7 @@ public class GhReps {
      * Количество звезд у репозитория GitHub
      */
     @SerializedName("stargazers_count")
-    private int starAmmount;
+    private int starAmount;
 
     /**
      * Объект владельца репозитория GitHub {@link GhRepsOwner}
@@ -61,12 +61,12 @@ public class GhReps {
         this.url = url;
     }
 
-    public int getStarAmmount() {
-        return starAmmount;
+    public int getStarAmount() {
+        return starAmount;
     }
 
-    public void setStarAmmount(int starAmmount) {
-        this.starAmmount = starAmmount;
+    public void setStarAmount(int startAmmount) {
+        this.starAmount = startAmmount;
     }
 
     public GhRepsOwner getOwner() {

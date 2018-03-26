@@ -27,6 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class PresenterSearch extends MvpPresenter<SearchView> implements ListPresenter {
 
+
     private List<SearchResultItem> items;
 
     private InteractorSearch topic;
@@ -142,6 +143,7 @@ public class PresenterSearch extends MvpPresenter<SearchView> implements ListPre
                         new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        resetPageNum();
                         handleErrorReceived(throwable);
                     }
                 });
